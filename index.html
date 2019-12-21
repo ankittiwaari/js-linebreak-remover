@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title>Remove line breaks</title>
+    <style>
+        #inp {
+            width: 100%;
+            HEight: 100vh;
+            border: none
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="inp" rows="30" cols="100"></textarea>
+    <script>
+         document.getElementById('inp').addEventListener('focus', function (event) {
+             event.target.value = '';
+         })
+        document.getElementById('inp').addEventListener('keyup', function (event) {
+            var content = event.target.value;
+            if (!content){
+                console.log('Empty content');
+                return;
+            }
+            var filteredContent = content.replace(/\n/g, ' ');
+            event.target.value = filteredContent;
+
+            navigator.clipboard.writeText(filteredContent).then(function () {
+                console.log('Copy OK');
+            }, function (e) {
+                console.log('Copy Failed', e.message);
+            });
+
+        });
+    </script>
+</body>
+
+</html>
